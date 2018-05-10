@@ -1,0 +1,18 @@
+
+body{
+  background: #0088cc;
+  margin-top: 30px;
+}
+
+td{
+  width: 20px;
+  height: 20px;
+  background: red;
+  border: 1px solid white;
+}
+
+.innerBox{
+  border: 2px solid white;
+  padding: 15px 30px;
+  width: 460px;
+}
