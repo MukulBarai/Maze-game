@@ -12,10 +12,11 @@ canvas.height = canvasHeight;
 context.fillStyle = 'blue';
 context.fillRect(0, 0, canvasWidth, canvasHeight);
 var gameOver = false;
+var started = false;
 
 var cells = [];
 var bird1 = new Bird(8, 10, 'turquoise');
-var bird2 = new Bird(9, 10, 'brown');
+var bird2 = new Bird(9, 10, 'violet');
 var bird3 = new Bird(10, 10, 'yellow');
 var birds = [bird1, bird2, bird3];
 var fruit = new Fruit(9, 12);
@@ -257,6 +258,9 @@ function updateFruit(){
 }
 
 function updateBirds(){
+  if(!started){
+    return;
+  }
   for(var count = 0; count < birds.length; count++){
     var queue = [];
     var visited = []
@@ -377,8 +381,7 @@ function draw(){
     for(var count = 0; count < birds.length; count++){
       birds[count].draw();
     }
-    fruit.draw();
-    context.fillStyle = 'red';
+    context.fillStyle = 'springgreen';
     context.fillRect(0, 10 * gridHeight, gridWidth, gridHeight);
     context.fillRect(18 * gridWidth, 10 * gridHeight, gridWidth, gridHeight);
 
@@ -386,6 +389,14 @@ function draw(){
     context.fillStyle = "white";
     context.font = "40px Sherif";
     var text = "Game over";
+    var xcor = canvasWidth / 2 - context.measureText(text).width / 2;
+    context.fillText(text, xcor, 200);
+  }
+
+  if(!started) {
+    context.fillStyle = "white";
+    context.font = "40px Sherif";
+    var text = "Press enter to start";
     var xcor = canvasWidth / 2 - context.measureText(text).width / 2;
     context.fillText(text, xcor, 200);
   }
@@ -401,7 +412,7 @@ function Cell(xcor, ycor){
 
     this.draw = function(){
       if(this.fill){
-        context.fillStyle = 'red';
+        context.fillStyle = 'springgreen';
         context.fillRect(
           this.xcor * this.width,
           this.ycor * this.height,
@@ -444,7 +455,7 @@ function Fruit(xcor, ycor){
 
     this.draw = function(){
       this.draw = function(){
-        context.fillStyle = 'white';
+        context.fillStyle = 'red';
         context.fillRect(
           this.xcor * this.width + 4,
           this.ycor * this.height + 4,
@@ -455,7 +466,13 @@ function Fruit(xcor, ycor){
   }
 
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode === 37) {
+  if(event.keyCode === 13){
+    started = true;
+  }
+  if(!started){
+    return;
+  }
+  else if (event.keyCode === 37) {
     nextDir = dir.left;
   }
   else if (event.keyCode === 38) {
