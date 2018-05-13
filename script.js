@@ -13,7 +13,7 @@ context.fillStyle = 'blue';
 context.fillRect(0, 0, canvasWidth, canvasHeight);
 var gameOver = false;
 var started = false;
-
+var score = 0;
 var cells = [];
 var bird1 = new Bird(8, 10, 'turquoise');
 var bird2 = new Bird(9, 10, 'violet');
@@ -177,7 +177,10 @@ function updateFruit(){
     }
     else if(!cells[fruit.xcor+1][fruit.ycor].fill){
         fruit.xcor++;
-        cells[fruit.xcor][fruit.ycor].food = 0;
+        if(cells[fruit.xcor][fruit.ycor].food){
+          cells[fruit.xcor][fruit.ycor].food = 0;
+          score += 5;
+        }
         curDir = nextDir;
         return;
     }
@@ -193,7 +196,10 @@ function updateFruit(){
     }
     else if(!cells[fruit.xcor-1][fruit.ycor].fill){
         fruit.xcor--;
-        cells[fruit.xcor][fruit.ycor].food = 0;
+        if(cells[fruit.xcor][fruit.ycor].food){
+          cells[fruit.xcor][fruit.ycor].food = 0;
+          score += 5;
+        }
         curDir = nextDir;
         return;
     }
@@ -201,7 +207,10 @@ function updateFruit(){
   else if(nextDir == dir.top){
       if(!cells[fruit.xcor][fruit.ycor-1].fill){
           fruit.ycor--;
-          cells[fruit.xcor][fruit.ycor].food = 0;
+          if(cells[fruit.xcor][fruit.ycor].food){
+            cells[fruit.xcor][fruit.ycor].food = 0;
+            score += 5;
+          }
           curDir = nextDir;
           return;
       }
@@ -209,7 +218,10 @@ function updateFruit(){
   else if(nextDir == dir.down){
       if(!cells[fruit.xcor][fruit.ycor+1].fill){
           fruit.ycor++;
-          cells[fruit.xcor][fruit.ycor].food = 0;
+          if(cells[fruit.xcor][fruit.ycor].food){
+            cells[fruit.xcor][fruit.ycor].food = 0;
+            score += 5;
+          }
           curDir = nextDir;
           return;
       }
@@ -226,7 +238,10 @@ function updateFruit(){
     }
     else if(!cells[fruit.xcor+1][fruit.ycor].fill){
         fruit.xcor++;
-        cells[fruit.xcor][fruit.ycor].food = 0;
+        if(cells[fruit.xcor][fruit.ycor].food){
+          cells[fruit.xcor][fruit.ycor].food = 0;
+          score += 5;
+        }
     }
   }
   else if(curDir == dir.left){
@@ -246,13 +261,19 @@ function updateFruit(){
   else if(curDir == dir.top){
       if(!cells[fruit.xcor][fruit.ycor-1].fill){
           fruit.ycor--;
-          cells[fruit.xcor][fruit.ycor].food = 0;
+          if(cells[fruit.xcor][fruit.ycor].food){
+            cells[fruit.xcor][fruit.ycor].food = 0;
+            score += 5;
+          }
       }
   }
   else if(curDir == dir.down){
       if(!cells[fruit.xcor][fruit.ycor+1].fill){
           fruit.ycor++;
-          cells[fruit.xcor][fruit.ycor].food = 0;
+          if(cells[fruit.xcor][fruit.ycor].food){
+            cells[fruit.xcor][fruit.ycor].food = 0;
+            score += 5;
+          }
       }
   }
 }
@@ -400,6 +421,8 @@ function draw(){
     var xcor = canvasWidth / 2 - context.measureText(text).width / 2;
     context.fillText(text, xcor, 200);
   }
+
+  document.getElementById('score').innerHTML = 'Score: ' + score;
 }
 
 function Cell(xcor, ycor){
