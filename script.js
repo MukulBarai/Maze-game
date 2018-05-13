@@ -1,16 +1,25 @@
+var fills = [[],[ 7, 9, 11, 13, 17 ],[ 2, 3, 5, 7, 9, 11, 13, 15, 19 ],
+[ 2, 3, 5, 7, 8, 9, 11, 12, 13, 15, 16, 17, 19 ], [ 19 ],
+[ 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 15, 17, 18, 19 ], [ 2, 3, 7, 15, 19 ],
+[ 2, 3, 5, 7, 9, 10, 11, 13, 15, 17, 19 ], [ 5, 9, 11, 13, 17 ],
+[ 1, 2, 3, 5, 6, 7, 11, 13, 14, 15, 17, 18, 19 ], [ 5, 9, 11, 13, 17 ],
+[ 2, 3, 5, 7, 9, 10, 11, 13, 15, 17, 19 ], [ 2, 3, 7, 15, 19 ],
+[ 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 15, 17, 18, 19 ], [ 19 ],
+[ 2, 3, 5, 7, 8, 9, 11, 12, 13, 15, 16, 17, 19 ],
+[ 2, 3, 5, 7, 9, 11, 13, 15, 19 ],[ 7, 9, 11, 13, 17 ],[]]
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext("2d");
 const gridWidth = 20;
 const gridHeight = 20;
 const colCount = 19;
 const rowCount = 22;
-const dir = {left: 0, right: 1, top: 2, down: 3, stop: 4};
 const canvasWidth = gridWidth * colCount;
 const canvasHeight = gridHeight * rowCount;
 canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 context.fillStyle = 'blue';
 context.fillRect(0, 0, canvasWidth, canvasHeight);
+const dir = {left: 0, right: 1, top: 2, down: 3, stop: 4};
 var gameOver = false;
 var started = false;
 var score = 0;
@@ -26,6 +35,7 @@ var nextDir = dir.stop;
 initialize();
 setFill();
 draw();
+run();
 
 function run(){
   setInterval(function(){
@@ -38,7 +48,6 @@ function run(){
   },500)
 }
 
-run();
 
 function initialize(){
   for(var i = 0; i < colCount; i++){
@@ -51,100 +60,11 @@ function initialize(){
 }
 
 function setFill(){
-    cells[1][7].fill = true;  cells[1][9].fill = true;
-    cells[1][11].fill = true; cells[1][13].fill = true;
-    cells[1][17].fill = true;
-
-    cells[2][2].fill = true;  cells[2][3].fill = true;
-    cells[2][5].fill = true;  cells[2][7].fill = true;
-    cells[2][9].fill = true;  cells[2][11].fill = true;
-    cells[2][13].fill = true; cells[2][15].fill = true;
-    cells[2][19].fill = true;
-
-    cells[3][2].fill = true;  cells[3][3].fill = true;
-    cells[3][5].fill = true;  cells[3][7].fill = true;
-    cells[3][8].fill = true;  cells[3][9].fill = true;
-    cells[3][11].fill = true; cells[3][12].fill = true;
-    cells[3][13].fill = true;
-    cells[3][15].fill = true; cells[3][16].fill = true;
-    cells[3][17].fill = true; cells[3][19].fill = true;
-
-    cells[4][19].fill = true;
-
-    cells[5][2].fill = true;  cells[5][3].fill = true;
-    cells[5][5].fill = true;  cells[5][6].fill = true;
-    cells[5][7].fill = true;  cells[5][8].fill = true;
-    cells[5][9].fill = true;  cells[5][11].fill = true;
-    cells[5][12].fill = true; cells[5][13].fill = true;
-    cells[5][15].fill = true; cells[5][17].fill = true;
-    cells[5][18].fill = true; cells[5][19].fill = true;
-
-    cells[6][2].fill = true;  cells[6][3].fill = true;
-    cells[6][7].fill = true;  cells[6][15].fill = true;
-    cells[6][19].fill = true;
-
-    cells[7][2].fill = true;  cells[7][3].fill = true;
-    cells[7][5].fill = true;  cells[7][7].fill = true;
-    cells[7][9].fill = true;  cells[7][10].fill = true;
-    cells[7][11].fill = true; cells[7][13].fill = true;
-    cells[7][15].fill = true; cells[7][17].fill = true;
-    cells[7][19].fill = true;
-
-    cells[8][5].fill = true;  cells[8][9].fill = true;
-    cells[8][11].fill = true; cells[8][13].fill = true;
-    cells[8][17].fill = true;
-
-    cells[9][1].fill = true;  cells[9][2].fill = true;
-    cells[9][3].fill = true;  cells[9][5].fill = true;
-    cells[9][6].fill = true;  cells[9][7].fill = true;
-    cells[9][11].fill = true; cells[9][13].fill = true;
-    cells[9][14].fill = true; cells[9][15].fill = true;
-    cells[9][17].fill = true; cells[9][18].fill = true;
-    cells[9][19].fill = true;
-
-    cells[10][5].fill = true;  cells[10][9].fill = true;
-    cells[10][11].fill = true; cells[10][13].fill = true;
-    cells[10][17].fill = true; cells[10][19].fill = false;
-
-    cells[11][2].fill = true;  cells[11][3].fill = true;
-    cells[11][5].fill = true;  cells[11][7].fill = true;
-    cells[11][9].fill = true;  cells[11][10].fill = true;
-    cells[11][11].fill = true; cells[11][13].fill = true;
-    cells[11][15].fill = true; cells[11][17].fill = true;
-    cells[11][19].fill = true;
-
-    cells[12][2].fill = true;  cells[12][3].fill = true;
-    cells[12][7].fill = true;  cells[12][15].fill = true;
-    cells[12][19].fill = true;
-
-    cells[13][2].fill = true;  cells[13][3].fill = true;
-    cells[13][5].fill = true;  cells[13][6].fill = true;
-    cells[13][7].fill = true;  cells[13][8].fill = true;
-    cells[13][9].fill = true;  cells[13][11].fill = true;
-    cells[13][12].fill = true; cells[13][13].fill = true;
-    cells[13][15].fill = true; cells[13][17].fill = true;
-    cells[13][18].fill = true; cells[13][19].fill = true;
-
-    cells[14][19].fill = true;
-
-    cells[15][2].fill = true;  cells[15][3].fill = true;
-    cells[15][5].fill = true;  cells[15][7].fill = true;
-    cells[15][8].fill = true;  cells[15][9].fill = true;
-    cells[15][11].fill = true; cells[15][12].fill = true;
-    cells[15][13].fill = true; cells[15][15].fill = true;
-    cells[15][16].fill = true; cells[15][17].fill = true;
-    cells[15][19].fill = true;
-
-    cells[16][2].fill = true;  cells[16][3].fill = true;
-    cells[16][5].fill = true;  cells[16][7].fill = true;
-    cells[16][9].fill = true;  cells[16][11].fill = true;
-    cells[16][13].fill = true; cells[16][15].fill = true;
-    cells[16][19].fill = true;
-
-    cells[17][7].fill = true;  cells[17][9].fill = true;
-    cells[17][11].fill = true; cells[17][13].fill = true;
-    cells[17][17].fill = true;
-
+    for(var i = 0; i < colCount; i++){
+      for(var j = 0; j < fills[i].length; j++){
+        cells[i][fills[i][j]].fill = true;
+      }
+    }
     for(var col=0; col < colCount; col++){
       cells[col][0].fill = true;
       cells[col][rowCount-1].fill = true;
