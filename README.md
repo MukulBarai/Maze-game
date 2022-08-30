@@ -1,7 +1,5 @@
 # Maze-game-in-js
 
-link: https://MukulBarai.github.io/Maze-game/
-
 The core algorithm of this game is BFS. I used breadth first search 
 algorithm to find the sortest path from birds to fruit.
 
